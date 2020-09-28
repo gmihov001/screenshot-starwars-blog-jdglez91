@@ -13,7 +13,7 @@ export const PlanetCard = props => {
 				</p>
 				<Link to="/details">
 					<a href="#" className="btn btn-primary">
-						Go somewhere
+						Details
 					</a>
 				</Link>
 			</div>

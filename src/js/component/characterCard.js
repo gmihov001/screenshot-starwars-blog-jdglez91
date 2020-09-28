@@ -11,9 +11,9 @@ export const CharacterCard = props => {
 				<p className="card-text">
 					Some quick example text to build on the card title and make up the bulk of the cards content.
 				</p>
-				<Link to = {'/details/${props.index + 1 }'}>
+				<Link to={`/details/${props.index + 1}`}>
 					<a href="#" className="btn btn-primary">
-						Go somewhere
+						Details
 					</a>
 				</Link>
 			</div>
@@ -21,5 +21,6 @@ export const CharacterCard = props => {
 	);
 };
 CharacterCard.propTypes = {
-	name: PropTypes.string
+	name: PropTypes.string,
+	index: PropTypes.number
 };

@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
 import "../../styles/home.scss";
-import { planetCard } from "../component/planetCard";
-import { charactersCard } from "../component/charactersCard";
+//import { Context } from "../store/appContext";
+import { CharacterCard } from "../component/characterCard";
+import { PlanetCard } from "../component/planetCard";
 
+//Hooks in line 10 sets characters with the values inside the useState ([""]) and useState gives us the initial value that were working with
+//setCharacters updates the value
 export const Home = () => {
-	const [characters, setCharacters] = useState([]);
-	const [planets, setPlanets] = useState([]);
+	const [characters, setCharacters] = useState(["Luke Skywalker", "CP3PO", "Darth Vader"]);
+	const [planets, setPlanets] = useState(["Tatooine", "Planet Boom", "Another Weird Planet"]);
+
+	// useEffect(()=>{
+	// }, []);
+	//syntax for useEffect the empty brackets makes the function run only once when the page renders
+	//use lesson on BreatheCode as a reference as well
 
 	useEffect(() => {
 		fetch("https://swapi.dev/api/planets/")
@@ -19,8 +26,8 @@ export const Home = () => {
 			})
 			.then(function(responseAsJson) {
 				// Do stuff with the JSON
-
-				setPlanets(responseAsJson.result);
+				console.log("responseAsJson", responseAsJson);
+				setPlanets(responseAsJson.results);
 			})
 			.catch(function(error) {
 				console.log("Looks like there was a problem: \n", error);
@@ -36,23 +43,24 @@ export const Home = () => {
 			})
 			.then(function(responseAsJson) {
 				// Do stuff with the JSON
-
-				setCharacters(responseAsJson.result);
+				console.log("responseAsJson", responseAsJson);
+				setCharacters(responseAsJson.results);
+				//.results specifies the location of our array inside of the fetch object in our API - same in line 30
 			})
 			.catch(function(error) {
 				console.log("Looks like there was a problem: \n", error);
 			});
 	}, []);
 
+	// const { store, actions } = useContext(Context);
 	return (
 		<div>
-			{characters.map((iten, index) => {
-				return <charactersCard key={index} character={item} index={index} />;
+			{characters.map((item, index) => {
+				return <CharacterCard key={index} character={item} index={index} />;
 			})}
-			{planets.map((iten, index) => {
-				return <planetsCard key={index} planet={item} index={index} />;
+			{planets.map((item, index) => {
+				return <PlanetCard key={index} planet={item} index={index} />;
 			})}
 		</div>
 	);
 };
-//  in the map component we need to pass

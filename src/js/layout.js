@@ -26,17 +26,12 @@ const Layout = () => {
 
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<Home />
 						<Route exact path="/demo">
 							<Demo />
 						</Route>
-						<Route exact path="/details">
-							<Details />
-							<Route path="/details/:id" component={Details} />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
+
+						<Route path="/details/:id" component={Details} />
+
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
