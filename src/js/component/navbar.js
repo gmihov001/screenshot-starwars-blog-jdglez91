@@ -14,7 +14,7 @@ export const Navbar = () => {
 			</Link>
 			<div className="ml-auto">
 				<button className="btn btn-primary" onClick={() => setIsOpen(!isOpen)}>
-					Favorites
+Favorites <span className="badge badge-secondary">{store.favorites.length}</span>
 				</button>
 
 				<div className={isOpen ? "d-block" : "d-none"}>

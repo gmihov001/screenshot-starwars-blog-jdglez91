@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../../styles/home.scss";
-//import { Context } from "../store/appContext";
+import { Context } from "../store/appContext";
 import { CharacterCard } from "../component/characterCard";
 import { PlanetCard } from "../component/planetCard";
 
@@ -10,57 +10,42 @@ import { PlanetCard } from "../component/planetCard";
 export class Home extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			characters: ["Luke Skywalker", "CP3PO", "Darth Vader"],
-			planets: ["Tatooine", "Planet Boom", "Another Weird Planet"]
-		};
+		this.state = {};
 	}
 
 	componentDidMount() {
-		fetch("https://swapi.dev/api/planets/")
-			.then(function(response) {
-				if (!response.ok) {
-					throw Error(response.statusText);
-				}
-				// Read the response as json.
-				return response.json();
-			})
-			.then(function(responseAsJson) {
-				// Do stuff with the JSON
-				console.log("responseAsJson", responseAsJson);
-				this.setState({ planets: responseAsJson.results });
-			})
-			.catch(function(error) {
-				console.log("Looks like there was a problem: \n", error);
-			});
-
-		fetch("https://swapi.dev/api/people/")
-			.then(function(response) {
-				if (!response.ok) {
-					throw Error(response.statusText);
-				}
-				// Read the response as json.
-				return response.json();
-			})
-			.then(function(responseAsJson) {
-				// Do stuff with the JSON
-				console.log("responseAsJson", responseAsJson);
-				this.setState({ characters: responseAsJson.results });
-				//.results specifies the location of our array inside of the fetch object in our API - same in line 30
-			})
-			.catch(function(error) {
-				console.log("Looks like there was a problem: \n", error);
-			});
+		// fetch("https://swapi.dev/api/planets/")
+		// 	.then(function(response) {
+		// 		if (!response.ok) {
+		// 			throw Error(response.statusText);
+		// 		}
+		// 		// Read the response as json.
+		// 		return response.json();
+		// 	})
+		// 	.then(function(responseAsJson) {
+		// 		// Do stuff with the JSON
+		// 		console.log("responseAsJson", responseAsJson);
+		// 		this.setState({ planets: responseAsJson.results });
+		// 	})
+		// 	.catch(function(error) {
+		// 		console.log("Looks like there was a problem: \n", error);
+		// 	});
 	}
 	render() {
 		return (
 			<div>
-				{this.state.characters.map((item, index) => {
-					return <CharacterCard key={index} character={item} index={index} />;
-				})}
-				{this.state.planets.map((item, index) => {
-					return <PlanetCard key={index} planet={item} index={index} />;
-				})}
+				<Context.Consumer>
+					{({ actions, store }) => {
+						<>
+							{store.characters.map((item, index) => {
+								return <CharacterCard key={index} character={item} index={index} />;
+							})}
+							{store.planets.map((item, index) => {
+								return <PlanetCard key={index} planet={item} index={index} />;
+							})}
+						</>;
+					}}
+				</Context.Consumer>
 			</div>
 		);
 	}
