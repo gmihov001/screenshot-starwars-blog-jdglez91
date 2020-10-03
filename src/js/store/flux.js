@@ -8,11 +8,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 
-			deleteFavorite: (index) => {
-                const newStore = getStore();
-                var newFavorites = newStore.favorites.filter((item, ind) => index !== ind);
-                setStore( { ...favorites, favorites: newFavorites})
-                
+			deleteFavorite: index => {
+				const newStore = getStore();
+				var newFavorites = newStore.favorites.filter((item, ind) => index !== ind);
+				setStore({ ...favorites, favorites: newFavorites });
+			},
 			addFavorite: name => {
 				const newStore = getStore();
 				newStore.favorites.push(name);

@@ -36,14 +36,16 @@ export class Home extends React.Component {
 			<div>
 				<Context.Consumer>
 					{({ actions, store }) => {
-						<>
-							{store.characters.map((item, index) => {
-								return <CharacterCard key={index} character={item} index={index} />;
-							})}
-							{store.planets.map((item, index) => {
-								return <PlanetCard key={index} planet={item} index={index} />;
-							})}
-						</>;
+						return (
+							<>
+								{store.characters.map((item, index) => {
+									return <CharacterCard key={index} character={item} index={index} />;
+								})}
+								{store.planets.map((item, index) => {
+									return <PlanetCard key={index} planet={item} index={index} />;
+								})}
+							</>
+						);
 					}}
 				</Context.Consumer>
 			</div>
